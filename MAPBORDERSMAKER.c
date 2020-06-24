@@ -1,8 +1,3 @@
-//解釈の自由の精神に基づき,マスターファイルを
-//自由に解釈してボーダーファイルを作成する独立関数
-//borders_maker_kyoku
-//borders_maker_passage
-//border_fileout
 #define BORDERSMAKER_C
 #include "BORDERSMAKER.h"
 #include "PASSAGE.h"

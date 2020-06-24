@@ -25,11 +25,11 @@
 
 static const char *playername = "NICKO_MCBRAIN";
 static const char *partname = "PLAYER_NICKO_MCBRAIN";
-static int NOP;//‹N“®‚Å‚Ì‘¼‚Ìƒp[ƒg”‚ğ‹L˜^‚µ‚Ä‚¨‚­
+static int NOP;//èµ·å‹•æ™‚ã§ã®ä»–ã®ãƒ‘ãƒ¼ãƒˆæ•°ã‚’è¨˜éŒ²ã—ã¦ãŠã
 static int NofS = 6;
 
-//typedef struct{int length,note;}PART;//ƒZƒbƒVƒ‡ƒ“‚Åg—p‚·‚é
-typedef struct{int wave,pre,note;}X;//ŒÂX‚Ìƒp[ƒg‚Åg—p
+//typedef struct{int length,note;}PART;//ã‚»ãƒƒã‚·ãƒ§ãƒ³ã§ä½¿ç”¨ã™ã‚‹
+typedef struct{int wave,pre,note;}X;//å€‹ã€…ã®ãƒ‘ãƒ¼ãƒˆã§ä½¿ç”¨
 //typedef struct{int c_head,c_file,have_more_children;}CHILDREN_SIDE;
 
 
@@ -38,34 +38,34 @@ static FILE *PassageOpen(int PassageID)
 	FILE *fp;char fn[260];
 	switch(PassageID)
 	{
-	case 1:sprintf(fn,"PASSAGE[‘O‘t].txt");break;
-	case 2:sprintf(fn,"PASSAGE[Aƒƒ].txt");break;
-	case 3:sprintf(fn,"PASSAGE[Bƒƒ].txt");break;
-	case 4:sprintf(fn,"PASSAGE[ƒTƒr].txt");break;
-	case 5:sprintf(fn,"PASSAGE[ŠÔ‘t].txt");break;
-	case 6:sprintf(fn,"PASSAGE[Œã‘t].txt");break;
-	default:printf("\n•s–¾‚ÈŠyßID = [%d]\nI—¹‚µ‚Ü‚·\n",PassageID);exit(1);break;
+	case 1:sprintf(fn,"PASSAGE[å‰å¥].txt");break;
+	case 2:sprintf(fn,"PASSAGE[Aãƒ¡ãƒ­].txt");break;
+	case 3:sprintf(fn,"PASSAGE[Bãƒ¡ãƒ­].txt");break;
+	case 4:sprintf(fn,"PASSAGE[ã‚µãƒ“].txt");break;
+	case 5:sprintf(fn,"PASSAGE[é–“å¥].txt");break;
+	case 6:sprintf(fn,"PASSAGE[å¾Œå¥].txt");break;
+	default:printf("Â¥nä¸æ˜ãªæ¥½ç¯€ID = [%d]Â¥nçµ‚äº†ã—ã¾ã™Â¥n",PassageID);exit(1);break;
 	}
 	fp = fopen(fn,"r");
-	if(fp==NULL){printf("[%s]‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ by PassageOpen()\nI—¹‚µ‚Ü‚·\n",fn);exit(1);}
-	//else{printf("[%s]‚ğŠJ‚«‚Ü‚· by PassageOpen()\n",fn);}
+	if(fp==NULL){printf("[%s]ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ by PassageOpen()Â¥nçµ‚äº†ã—ã¾ã™Â¥n",fn);exit(1);}
+	//else{printf("[%s]ã‚’é–‹ãã¾ã™ by PassageOpen()Â¥n",fn);}
 	return fp;
 }
 
-static int fill_children_side(int masterfilenumber,CHILDREN_SIDE *dest,int n)//ƒ}ƒXƒ^[ƒtƒ@ƒCƒ‹‚ğg‚¤ŠÖ”‚É‚Í•Ö—˜‚©‚à
+static int fill_children_side(int masterfilenumber,CHILDREN_SIDE *dest,int n)//ãƒã‚¹ã‚¿ãƒ¼ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½¿ã†é–¢æ•°ã«ã¯ä¾¿åˆ©ã‹ã‚‚
 {
-	MASTERFORMAT m,c;int x=(-1);//ˆê–‡Šâ‚È‚ç‘S•”‚ª‘ã“ü‚³‚ê‚é
+	MASTERFORMAT m,c;int x=(-1);//ä¸€æšå²©ãªã‚‰å…¨éƒ¨ãŒä»£å…¥ã•ã‚Œã‚‹
 	int i,j;FILE *masterfp,*childfp;
 	masterfp = masteropen(masterfilenumber);m = master_fscanf(masterfp);
-	//if(n!=m.count){printf("\n\nfill_children_side()\n[%d] <= m.count\n[%d] <= n (ˆø”)\nI—¹‚µ‚Ü‚·\n\n",m.count,n);exit(1);}
+	//if(n!=m.count){printf("Â¥nÂ¥nfill_children_side()Â¥n[%d] <= m.countÂ¥n[%d] <= n (å¼•æ•°)Â¥nçµ‚äº†ã—ã¾ã™Â¥nÂ¥n",m.count,n);exit(1);}
 	for(i=0;i<n;i++){if(i%(n/m.linenumber) ==0){fscanf(masterfp,"%d",&x);dest[i].c_head = 1;dest[i].have_more_children = 1;}dest[i].c_file = x;}
 	for(i=0;i<n;i++)
 	{
-		if(dest[i].c_head==1)//ƒwƒbƒhƒLƒƒƒbƒ`
+		if(dest[i].c_head==1)//ãƒ˜ãƒƒãƒ‰ã‚­ãƒ£ãƒƒãƒ
 		{
 			childfp = masteropen(dest[i].c_file);c = master_fscanf(childfp);if(c.linenumber>0){dest[i].have_more_children = 1;}
 			fclose(childfp);
-			for(j=i;j<n;dest[i].c_head++,j++){if(j==n-1 || dest[j+1].c_head>0)break;}//À‚Í‚±‚ê,‚»‚ñ‚È‚É“ï‚µ‚¢‚±‚Æ‚Å‚Í‚È‚¢
+			for(j=i;j<n;dest[i].c_head++,j++){if(j==n-1 || dest[j+1].c_head>0)break;}//å®Ÿã¯ã“ã‚Œ,ãã‚“ãªã«é›£ã—ã„ã“ã¨ã§ã¯ãªã„
 		}
 	}
 	fclose(masterfp);return 0;
@@ -78,8 +78,8 @@ static FILE *DrumsPatternOpen(int MovementID,int PassageID,int MasterID)
 	FILE *patternfp;
 	char patternfn[260];
 	int NofS;//NUmberOfSet
-	NofS = sizeof(setting) / sizeof(int);//ƒ†ƒjƒbƒgŒvZ
-//printf("[%d]“_ƒZƒbƒg by DrumsPatternOpen()\n",NofS);
+	NofS = sizeof(setting) / sizeof(int);//ãƒ¦ãƒ‹ãƒƒãƒˆè¨ˆç®—
+//printf("[%d]ç‚¹ã‚»ãƒƒãƒˆ by DrumsPatternOpen()Â¥n",NofS);
 	sprintf(patternfn,"%s_%d_%d_%d.txt",partname,MovementID,PassageID,MasterID);
 	patternfp = fopen(patternfn,"r");
 	if(patternfp==NULL)
@@ -96,7 +96,7 @@ static FILE *DrumsPatternOpen(int MovementID,int PassageID,int MasterID)
 			case 5:Hit_K = BassDrum_MIDI;Hit_L = (i%2==1) ? setting[4]:0;Hit_R = 0;break;
 			case 6:Hit_K = BassDrum_MIDI;Hit_L = (i%4==0) ? setting[5]:0;Hit_R = 0;break;
 			}
-			fprintf(patternfp,"2,%d,%d,%d,%d\n",beat_head,Hit_K,Hit_L,Hit_R);
+			fprintf(patternfp,"2,%d,%d,%d,%dÂ¥n",beat_head,Hit_K,Hit_L,Hit_R);
 		}
 		fclose(patternfp);
 		patternfp = fopen(patternfn,"r");
@@ -129,27 +129,27 @@ static int Maker_NICKO_MCBRAIN_Master(int MasterNumber,SCORE_LINE *s,X **x,int n
 	cside = (CHILDREN_SIDE *)calloc(n,sizeof(CHILDREN_SIDE));
 	fill_children_side(1,cside,n);
 
-	//‚±‚±‚Å‚Ğ‚Æ‚­‚­‚è‚É‚·‚é
+	//ã“ã“ã§ã²ã¨ããã‚Šã«ã™ã‚‹
 	for(i=0;i<n;i++)
 	{
 		if(cside[i].c_head>0){rewind(patternfp);}LABEL_REWIND:
 		if(fscanf(patternfp,"%d,%d,%d,%d,%d",&linekind,&beathead,&x[i][0].note,&x[i][1].note,&x[i][2].note)<=0){rewind(patternfp);goto LABEL_REWIND;}
 	}
-	//for(i=0;i<n;i++){x[i][0].note = (1%2==0) ? BassDrum_MIDI:0;}//‘«
-	for(i=0;i<n;i++){if((i<(n/2)&&i>(n*3/8)) || i>(n*7/8)){LR_Hit(&(x[i][1].note),&(x[i][2].note),PassageID);}}//è
+	//for(i=0;i<n;i++){x[i][0].note = (1%2==0) ? BassDrum_MIDI:0;}//è¶³
+	for(i=0;i<n;i++){if((i<(n/2)&&i>(n*3/8)) || i>(n*7/8)){LR_Hit(&(x[i][1].note),&(x[i][2].note),PassageID);}}//æ‰‹
 	fclose(patternfp);
-	//‚±‚±‚Å‚Ğ‚Æ‚­‚­‚è‚É‚µ‚È‚¢
-	//Maker_NICKO_MCBRAIN_Master(int MasterNumber,SCORE_LINE *s,X **x,int n,int PassageID,int NofS,int NofOP,PART **OP);//‰ñ‹AŒÄ‚Ño‚µ
+	//ã“ã“ã§ã²ã¨ããã‚Šã«ã—ãªã„
+	//Maker_NICKO_MCBRAIN_Master(int MasterNumber,SCORE_LINE *s,X **x,int n,int PassageID,int NofS,int NofOP,PART **OP);//å›å¸°å‘¼ã³å‡ºã—
 //for(i=0;i<n;i++){x[i][0].note = i;}
-	//“¯‚¶ƒ}ƒXƒ^[ƒiƒ“ƒo[‚ÉƒRƒs[(‚æ‚ë‚µ‚¯‚ê‚ÎƒAƒŒƒ“ƒW‚µ‚Ü‚·)
+	//åŒã˜ãƒã‚¹ã‚¿ãƒ¼ãƒŠãƒ³ãƒãƒ¼ã«ã‚³ãƒ”ãƒ¼(ã‚ˆã‚ã—ã‘ã‚Œã°ã‚¢ãƒ¬ãƒ³ã‚¸ã—ã¾ã™)
 ///*
 	for(i=0;i<n;i++)
 	{
-		if(cside[i].c_head>0)//1st ƒwƒbƒhƒLƒƒƒbƒ`
+		if(cside[i].c_head>0)//1st ãƒ˜ãƒƒãƒ‰ã‚­ãƒ£ãƒƒãƒ
 		{
 			for(j=i;j<n;j++)
 			{
-				if(cside[j].c_head>0 && cside[j].c_file==cside[i].c_file)//2nd ƒwƒbƒhƒLƒƒƒbƒ`
+				if(cside[j].c_head>0 && cside[j].c_file==cside[i].c_file)//2nd ãƒ˜ãƒƒãƒ‰ã‚­ãƒ£ãƒƒãƒ
 				{
 					for(k=0;j+k<n;k++)
 					{
@@ -160,7 +160,7 @@ static int Maker_NICKO_MCBRAIN_Master(int MasterNumber,SCORE_LINE *s,X **x,int n
 							x[j+k][2].note = x[i+k][2].note;
 							x[j+k][3].note = x[i+k][3].note;
 							//*x[j+k] = *x[i+k];
-							//printf("ƒRƒs[‚µ‚Ü‚· by %s()\n",playername);
+							//printf("ã‚³ãƒ”ãƒ¼ã—ã¾ã™ by %s()Â¥n",playername);
 						}else{break;}
 					}
 				}
@@ -168,12 +168,12 @@ static int Maker_NICKO_MCBRAIN_Master(int MasterNumber,SCORE_LINE *s,X **x,int n
 		}
 	}
 //*/
-	//for(i=0;i<n;i++){printf("[%3d] => [%3d] by %s [%d,%d]\n",i,x[i][0].note,playername,cside[i].c_head,cside[i].c_file);}
+	//for(i=0;i<n;i++){printf("[%3d] => [%3d] by %s [%d,%d]Â¥n",i,x[i][0].note,playername,cside[i].c_head,cside[i].c_file);}
 	free(cside);
 	return 0;
 }
 
-static int Maker_NICKO_MCBRAIN_Passage(int passageID,SCORE_LINE *s,X **x,int n)//‰¡•À‚Ñƒtƒ@ƒCƒ‹ì¬‚·‚×‚«(‰¹‚‚Ì‚İ)
+static int Maker_NICKO_MCBRAIN_Passage(int passageID,SCORE_LINE *s,X **x,int n)//æ¨ªä¸¦ã³ãƒ•ã‚¡ã‚¤ãƒ«ä½œæˆã™ã¹ã(éŸ³é«˜ã®ã¿)
 {
 	FORMAT_PASSAGE p;FILE *passagefp;
 	
@@ -181,14 +181,14 @@ static int Maker_NICKO_MCBRAIN_Passage(int passageID,SCORE_LINE *s,X **x,int n)/
 	int WhatToDo = POWERCHORD;
 	//int solo,powerchord;
 	//FILE *missionfp;char missionfn[260];
-	//Xƒp[ƒg‚Ì•â²,ƒ\ƒ,ƒoƒbƒN“™‚Ì–ğŠ„‚ğƒtƒ@ƒCƒ‹‚É•Û‘¶mission_X_Y.txt(‚ ‚ê‚ÎŠJ‚­‚±‚Ìƒp[ƒg‚ª•K—v‚É‰‚¶‚Ä•Êƒp[ƒg‚É•‚¯‚ğ‹‚ß‚é‚Ì‚à‚ ‚èŠù‚É‘¶İ‚·‚é‚È‚çì‚é‚×‚«‚Å‚Í‚È‚¢)
+	//Xãƒ‘ãƒ¼ãƒˆã®è£œä½,ã‚½ãƒ­,ãƒãƒƒã‚¯ç­‰ã®å½¹å‰²ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜mission_X_Y.txt(ã‚ã‚Œã°é–‹ãã“ã®ãƒ‘ãƒ¼ãƒˆãŒå¿…è¦ã«å¿œã˜ã¦åˆ¥ãƒ‘ãƒ¼ãƒˆã«åŠ©ã‘ã‚’æ±‚ã‚ã‚‹ã®ã‚‚ã‚ã‚Šæ—¢ã«å­˜åœ¨ã™ã‚‹ãªã‚‰ä½œã‚‹ã¹ãã§ã¯ãªã„)
 	FILE *mysoundfp;char mysoundfn[260];
 	//char *testline = "-1,-2,-3,-4,-5,-6,-7";
 	int testint[8]={0};
 int outnote[6];
 	
 	char PartsScaner[1000]={0};
-	PART **OP;//OtherParts‚Ì—ª(ƒ|ƒCƒ“ƒ^ƒe[ƒuƒ‹)
+	PART **OP;//OtherPartsã®ç•¥(ãƒã‚¤ãƒ³ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«)
 	int NofOP;
 	int i,j;CHORD nowchord;int ID;FILE *scrapfp;passagefp = PassageOpen(passageID);p= passage_fscanf(passagefp);fclose(passagefp);
 
@@ -197,14 +197,14 @@ int outnote[6];
 	
 	sprintf(mysoundfn,"mysound_%s_%d.txt",partname,passageID);
 	mysoundfp = fopen(mysoundfn,"w");
-	OP = (PART**)calloc(n,sizeof(PART*));//s”•ªƒ|ƒCƒ“ƒ^‚ğŠm•Û
+	OP = (PART**)calloc(n,sizeof(PART*));//è¡Œæ•°åˆ†ãƒã‚¤ãƒ³ã‚¿ã‚’ç¢ºä¿
 	for(i=0;i<n;i++)
 	{
-		OP[i] = (PART*)calloc(NofOP,sizeof(PART));//‚»‚ê‚¼‚ê‚Ìs‚Éƒp[ƒg¶¬
-		if(OP[i]==NULL){printf("ƒƒ‚ƒŠŠm•Û¸”s\n");exit(1);}
+		OP[i] = (PART*)calloc(NofOP,sizeof(PART));//ãã‚Œãã‚Œã®è¡Œã«ãƒ‘ãƒ¼ãƒˆç”Ÿæˆ
+		if(OP[i]==NULL){printf("ãƒ¡ãƒ¢ãƒªç¢ºä¿å¤±æ•—Â¥n");exit(1);}
 	}
 
-LoadSession_Passage(OP,NofOP,1,passageID);//for(i=0;i<64;i++){printf("%s [%2d] => ",partname,i);for(j=0;j<NofOP;j++){printf(",%3d",OP[i][j].note);}printf("\n");}
+LoadSession_Passage(OP,NofOP,1,passageID);//for(i=0;i<64;i++){printf("%s [%2d] => ",partname,i);for(j=0;j<NofOP;j++){printf(",%3d",OP[i][j].note);}printf("Â¥n");}
 
 Maker_NICKO_MCBRAIN_Master(p.masterfile,s,x,n,passageID,NofS,NofOP,OP);
 	
@@ -219,7 +219,7 @@ for(i=0;i<NofOP;i++){free(OP[i]);OP[i]=NULL;}
 		{
 			if(x[i][j].note>0){outnote[j] = x[i][j].note;}
 			fprintf(mysoundfp,"%d",outnote[j]);
-			if(j==NofS-1){fprintf(mysoundfp,"\n");}else{fprintf(mysoundfp,",");}
+			if(j==NofS-1){fprintf(mysoundfp,"Â¥n");}else{fprintf(mysoundfp,",");}
 		}
 	}
 	fclose(mysoundfp);
@@ -227,51 +227,52 @@ for(i=0;i<NofOP;i++){free(OP[i]);OP[i]=NULL;}
 	return 0;
 }
 
-       int Maker_NICKO_MCBRAIN_Movement(char *scorefn)//TrackMaker(scorefn,partname)‚É‚·‚×‚«?
+       int Maker_NICKO_MCBRAIN_Movement(char *scorefn)//TrackMaker(scorefn,partname)ã«ã™ã¹ã?
 {char trackname[6][FILENAME_MAX];int NofPL;
-	char test[1000];int ID;//•K‚¸‚µ‚àŠyß‚Ğ‚Æ‚Ü‚Æ‚Ü‚è‚Æ‚ÍŒÀ‚ç‚È‚¢‚Ì‚Å ID ‚Æ‚µ‚Ä‚¨‚­//int now_passage=(-1);
+	char test[1000];int ID;//å¿…ãšã—ã‚‚æ¥½ç¯€ã²ã¨ã¾ã¨ã¾ã‚Šã¨ã¯é™ã‚‰ãªã„ã®ã§ ID ã¨ã—ã¦ãŠã//int now_passage=(-1);
 	X **x;
 	USTFILEINFO finf = {120,1};
 
-FILE *tfp=NULL;char tfn[260];//‚±‚ê6ƒtƒ@ƒCƒ‹o—Í‚·‚×‚«
+FILE *tfp=NULL;char tfn[260];//ã“ã‚Œ6ãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›ã™ã¹ã
 
-	int linekind;char line[1000];SCORE_LINE *s;int *parts;int m=0,n,i,j;//ƒp[ƒg‚Ìs—ñ
+	int linekind;char line[1000];SCORE_LINE *s;int *parts;int m=0,n,i,j;//ãƒ‘ãƒ¼ãƒˆã®è¡Œåˆ—
 	FILE *scorefp=NULL;
-NOP = NumberOfParts(NULL,1);printf("Maker_%s() ‹N“® => Šù‚É[%d]ƒp[ƒg\n",partname,NOP);
+NOP = NumberOfParts(NULL,1);printf("Maker_%s() èµ·å‹•æ™‚ => æ—¢ã«[%d]ãƒ‘ãƒ¼ãƒˆÂ¥n",partname,NOP);
 	sprintf(tfn,"%s.txt",partname);
 
 	scorefp = fopen(scorefn,"r");while(fscanf(scorefp,"%d,%s",&linekind,line)>0){if(linekind==LINEKIND_BODY)m++;}fclose(scorefp);scorefp=NULL;
-	x = (X**)calloc(m,sizeof(X*));//s”•ªX‚Ìƒ|ƒCƒ“ƒ^ƒe[ƒuƒ‹Šm•Û
-	for(i=0;i<m;i++){x[i] = (X*)calloc(NofS,sizeof(X));}//‘Ss‚É6Œ·ì¬
+	x = (X**)calloc(m,sizeof(X*));//è¡Œæ•°åˆ†Xã®ãƒã‚¤ãƒ³ã‚¿ãƒ†ãƒ¼ãƒ–ãƒ«ç¢ºä¿
+	for(i=0;i<m;i++){x[i] = (X*)calloc(NofS,sizeof(X));}//å…¨è¡Œã«6å¼¦ä½œæˆ
 
-	if(x==NULL){printf("[%d]ŒÂ‚Ì X ƒƒ‚ƒŠŠm•Û => ¸”s by Maker_%s()\n",m,partname);exit(1);}else{printf("[%d]ŒÂ‚Ì X ƒƒ‚ƒŠŠm•Û@=> ¬Œ÷ by Maker_%s()\n",m,partname);}
+	if(x==NULL){printf("[%d]å€‹ã® X ãƒ¡ãƒ¢ãƒªç¢ºä¿ => å¤±æ•— by Maker_%s()Â¥n",m,partname);exit(1);}else{printf("[%d]å€‹ã® X ãƒ¡ãƒ¢ãƒªç¢ºä¿ã€€=> æˆåŠŸ by Maker_%s()Â¥n",m,partname);}
 	s = (SCORE_LINE*)calloc(m,sizeof(SCORE_LINE));
-	if(s==NULL){printf("[%d]ŒÂ‚Ì SCORE_LINE ƒƒ‚ƒŠŠm•Û => ¸”s by Maker_%s()\n",m,partname);exit(1);}else{printf("[%d]ŒÂ‚Ì SCORE_LINE ƒƒ‚ƒŠŠm•Û@=> ¬Œ÷ by Maker_%s()\n",m,partname);}
+	if(s==NULL){printf("[%d]å€‹ã® SCORE_LINE ãƒ¡ãƒ¢ãƒªç¢ºä¿ => å¤±æ•— by Maker_%s()Â¥n",m,partname);exit(1);}else{printf("[%d]å€‹ã® SCORE_LINE ãƒ¡ãƒ¢ãƒªç¢ºä¿ã€€=> æˆåŠŸ by Maker_%s()Â¥n",m,partname);}
 
-	scorefp = fopen(scorefn,"r");fscanf(scorefp,"%d,%s",&linekind,line);//ƒwƒbƒ_[“Ç‚İ”ò‚Î‚µ
-	for(i=0;i<m;i++){fscanf(scorefp,"%d,%s",&linekind,line);score_line_sscanf(line,&s[i]);}//“Ç‚İ‚İ
+	scorefp = fopen(scorefn,"r");fscanf(scorefp,"%d,%s",&linekind,line);//ãƒ˜ãƒƒãƒ€ãƒ¼èª­ã¿é£›ã°ã—
+	for(i=0;i<m;i++){fscanf(scorefp,"%d,%s",&linekind,line);score_line_sscanf(line,&s[i]);}//èª­ã¿è¾¼ã¿
 	fclose(scorefp);scorefp=NULL;
-//////////////////////////////////////////////////ƒXƒRƒAƒtƒ@ƒCƒ‹“Ç‚İ‚İŠ®—¹
+//////////////////////////////////////////////////ã‚¹ã‚³ã‚¢ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿å®Œäº†
 
-//////////////////////////////////ƒƒ‚ƒŠã‚Ì‘€ì‚Í‚±‚±‚©‚ç
+//////////////////////////////////ãƒ¡ãƒ¢ãƒªä¸Šã®æ“ä½œã¯ã“ã“ã‹ã‚‰
 ///*
 	for(i=0;i<m;i++)
 	{
-		if(s[i].passage_head==1)//–¼•t‚¯‚ÄƒwƒbƒhƒLƒƒƒbƒ`
+		if(s[i].passage_head==1)//åä»˜ã‘ã¦ãƒ˜ãƒƒãƒ‰ã‚­ãƒ£ãƒƒãƒ
 		{
 			for(j=i,NofPL=1;j!=m-1 && s[j+1].passage_head==0;j++,NofPL++);
-//printf("PASSAGE[%d]‚Í[%d]s‚Å1ƒZƒbƒg by Maker_%s()\n",s[i].passage_number,NofPL,playername);
+//printf("PASSAGE[%d]ã¯[%d]è¡Œã§1ã‚»ãƒƒãƒˆ by Maker_%s()Â¥n",s[i].passage_number,NofPL,playername);
 			Maker_NICKO_MCBRAIN_Passage(s[i].passage_number,&s[i],&x[i],NofPL);
 		}
 	}
 //*/
-//////////////////////////////////ƒƒ‚ƒŠã‚Ì‘€ì‚Í‚±‚±‚Ü‚Å
+//////////////////////////////////ãƒ¡ãƒ¢ãƒªä¸Šã®æ“ä½œã¯ã“ã“ã¾ã§
 
-//////////////////////////////////////////////////ˆÈ‰ºo—Í
-	for(j=0;j<2;j++){sprintf(tfn,"%s_%dŒ·.txt",playername,j+1);tfp = fopen(tfn,"w");for(i=0;i<m;i++){fprintf(tfp,"%d,%d\n",s[i].length,x[i][j].note);}fclose(tfp);}
+//////////////////////////////////////////////////ä»¥ä¸‹å‡ºåŠ›
+	for(j=0;j<2;j++){sprintf(tfn,"%s_%då¼¦.txt",playername,j+1);tfp = fopen(tfn,"w");for(i=0;i<m;i++){fprintf(tfp,"%d,%dÂ¥n",s[i].length,x[i][j].note);}fclose(tfp);}
 	
 	for(i=0;i<m;i++){free(x[i]);x[i] = NULL;}
 	free(x);x=NULL;free(s);s=NULL;
-	for(j=0;j<2;j++){sprintf(trackname[j],"%s_%dŒ·",playername,j+1);ust_file_out(trackname[j],&finf);}
+	for(j=0;j<2;j++){sprintf(trackname[j],"%s_%då¼¦",playername,j+1);ust_file_out(trackname[j],&finf);}
 	return 0;
 }
+

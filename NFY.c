@@ -1,5 +1,4 @@
 /*
-//NFY(何でもファイル野郎)
 //MFはMakeFileの略
 //fnはFileNameの略i,o = input,output
 //フォーマット
