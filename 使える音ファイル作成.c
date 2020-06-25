@@ -22,7 +22,7 @@ const char *IntToString(int note)
 }
 
 //case CHORD_KIND_M:break;case CHORD_KIND_m:break;case CHORD_KIND_aug:break;case CHORD_KIND_dim:break;case CHORD_KIND_6:break;case CHORD_KIND_m6:break;case CHORD_KIND_maj7:break;case CHORD_KIND_mmaj7:break;case CHORD_KIND_7:break;case CHORD_KIND_m7:break;case CHORD_KIND_7aug:break;case CHORD_KIND_7f5:break;case CHORD_KIND_m7aug:break;case CHORD_KIND_m7f5:break;case CHORD_KIND_sus4:break;case CHORD_KIND_7sus4:break;default:break;
-static int SetChord(int *x,int root,int ChordKind)
+int SetChord(int *x,int root,int ChordKind)
 {int i;for(i=0;i<12;i++){x[i] = 0;}
 	x[(root)%12] = 1;//根音は絶対
 	switch(ChordKind)
@@ -46,7 +46,7 @@ static int SetChord(int *x,int root,int ChordKind)
 	default:printf("ChordKind = [%d] は対応していません by SetChord()\n",ChordKind);break;
 	}return 0;
 }
-static int Candidate()
+int Candidate()
 {char test[234];
 	int i,j,root,chordkind;
 	int pin[12];//ボーリングのピンと同じ
@@ -88,8 +88,7 @@ int main2()
 	Candidate();
 	return 0;
 }
-
-static int MakeCanUseNoteFile(int root,int chordkind)//Avalableな音をファイルにするchoarkind>0ならリクエストに応える
+int MakeCanUseNoteFile(int root,int chordkind)//Avalableな音をファイルにするchoarkind>0ならリクエストに応える
 {//アボイドノートであってもメロディで普通に短い音として使う
 #define NONCHORDTONE (-1)
 #define AVOIDNOTE    (-2)

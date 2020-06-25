@@ -8,7 +8,7 @@
 #define LINEKIND_HEADER 1
 #define LINEKIND_BODY   2
 
-static FILE *patternfile_ab(int patternfilenumber)
+FILE *patternfile_ab(int patternfilenumber)
 {
 	int i;FILE *patternfp=NULL;char patternfn[FILENAME_MAX];
 	//printf("[%d]‚ðŽg‚¢‚Ü‚·\n",patternfilenumber);
@@ -25,7 +25,7 @@ static FILE *patternfile_ab(int patternfilenumber)
 	return patternfp;
 }
 
-static int fill_ab(BORDERS *manaita,int number)
+int fill_ab(BORDERS *manaita,int number)
 {//‚±‚ÌŽž“_‚Å CH ‚ªŒˆ‚Ü‚Á‚Ä‚é‚Æ‚ÍŒÀ‚ç‚È‚¢
 	int i,j;FILE *patternfp=NULL;//for(i=0;i<number;i++){manaita[i].ab = 0;}return 0;//¡‚Í‚Ü‚¾ RETURN
 
@@ -40,7 +40,7 @@ static int fill_ab(BORDERS *manaita,int number)
 	return 0;
 }
 
-static int fill_rb(BORDERS *manaita,int number)
+int fill_rb(BORDERS *manaita,int number)
 {
 	int i,j;//for(i=0;i<number;i++){manaita[i].rb = 0;}return 0;//¡‚Í‚Ü‚¾ RETURN
 

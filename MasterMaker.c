@@ -1,10 +1,16 @@
 //同じ ID ならルーツは同じ(しかし完全コピーとは限らない)
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+//#include <math.h>
 #include "PASSAGE.h"
 #include "masterfile.h"
 
+static int pow(unsigned int x,unsigned int n){
+	int ret=1;
+	int i;
+	for(i=0;i<n;i++){ret *= x;}
+	return ret;
+}
 
 static int pow2(const int big,const int small)
 {
@@ -22,8 +28,7 @@ static int TestBaiCore(int CoreID,int NofBar)
 	return 0;
 }
 
-static int TestCoreMaker(int CoreID,int NofBar)
-{
+int TestCoreMaker(int CoreID,int NofBar){
 	int i;int NofBeatPerBar = 8;
 	int Length,BH,CH,AH,RH;int pucchoID;
 	
@@ -41,8 +46,7 @@ static int TestCoreMaker(int CoreID,int NofBar)
 	return 0;
 }
 
-static int TestCoreBarNumber(int CoreID)
-{
+int TestCoreBarNumber(int CoreID){
 	int LineKind,x;char Line[1280];
 	FILE *Corefp;char Corefn[260];
 	sprintf(Corefn,"CORE_%d.txt",CoreID);
@@ -67,8 +71,7 @@ int TEST_MASTER_PARENT_Maker(int PassageID,int NofBar)//NofBar個の小節を含むマス
 	return MasterID;
 }
 
-
-static int PassageLoad(FORMAT_PASSAGE *dest,int PassageID)
+int PassageLoad(FORMAT_PASSAGE *dest,int PassageID)
 {
 	char *table[] = {"PASSAGE[前奏].txt","PASSAGE[Aメロ].txt","PASSAGE[Bメロ].txt","PASSAGE[サビ].txt","PASSAGE[間奏].txt","PASSAGE[後奏].txt"};
 	FILE *PassageFp;char PassageFn[260];FORMAT_PASSAGE x;sprintf(PassageFn,"%s",table[PassageID-1]);
@@ -78,7 +81,7 @@ static int PassageLoad(FORMAT_PASSAGE *dest,int PassageID)
 	return 1;
 }
 
-static int MasterMaker_Passage(int MovementID,int PassageID)
+int MasterMaker_Passage(int MovementID,int PassageID)
 {
 	int LineKind;char Line[1280];FILE *PassageFp;char PassageFn[260];printf("MasterMaker_Passage(%d)開始\n",PassageID);
 	printf("MasterMaker_Passage(%d)開始\n",PassageID);sprintf(PassageFn,"PASSAGE_%d_%d.txt",MovementID,PassageID);

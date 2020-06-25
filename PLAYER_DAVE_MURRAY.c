@@ -33,7 +33,7 @@ static int NearWhite(int note,int whitefile,int pm)//D‚İ‚ÌƒXƒP[ƒ‹‚Å‚¢‚¢‚ñ‚¶‚á‚
 
 
 
-static int fill_children_side(int masterfilenumber,CHILDREN_SIDE *dest,int n)//ƒ}ƒXƒ^[ƒtƒ@ƒCƒ‹‚ğg‚¤ŠÖ”‚É‚Í•Ö—˜‚©‚à
+int fill_children_side(int masterfilenumber,CHILDREN_SIDE *dest,int n)//ƒ}ƒXƒ^[ƒtƒ@ƒCƒ‹‚ğg‚¤ŠÖ”‚É‚Í•Ö—˜‚©‚à
 {
 	MASTERFORMAT m,c;int x=(-1);//ˆê–‡Šâ‚È‚ç‘S•”‚ª‘ã“ü‚³‚ê‚é
 	int i,j;FILE *masterfp,*childfp;

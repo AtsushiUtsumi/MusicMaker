@@ -1,7 +1,3 @@
-
-//絶対的人間の否定
-//プログラム芸術とは作者の意志の分断
-//完成したこのプログラムの作品に僕は作者の意志を見るのか
 //writer(void) : writer_kaiki()
 //reader(void) : reader_kaiki()
 //これが理想形
@@ -106,7 +102,7 @@ int map(int masterfile)//未決定のところは-1
 	return 0;
 }
 
-static int writer()//マスターファイルの作者
+int writer()//マスターファイルの作者
 {FORMAT_PASSAGE p;char cmd[1280];FILE *pfp;char pfn[128];
 	FILE *khfp;char *khfn = "曲編成.txt";
 	
@@ -136,7 +132,7 @@ static int writer()//マスターファイルの作者
 //絶対的自我によるマスターファイルの解釈
 //音楽はあくまでその感想文
 
-static int reader(){readtest();return 0;}
+int reader(){readtest();return 0;}
 
 int reader_kaiki(FILE *fp,int masternumber)//ファイルの末尾にマスターファイルの中身を付け足すテスト用回帰関数
 {
@@ -189,8 +185,7 @@ if(rl>0){fprintf(fp,"%d,%d\n",kari,rl);}
 	return 0;
 }
 
-static int readtest()
-{
+int readtest(){
 	int masternumber;
 	
 	char cmd[1280];
@@ -229,9 +224,8 @@ if(khfp==NULL){printf("%sが見つかりません\n",khfn);exit(1);}
 //const char *kari = "仮メロ.txt";
 //const char *kari = "GUITAR.txt";
 
-static int testustout()
-{
-	extern int q(char *,int);
+int testustout(){
+	//extern int q(char *,int);
 	extern int nameraka(int,int,int);
 	char cmd[1200];
 	int t=0;
@@ -278,7 +272,7 @@ txtfp = fopen(ngfn,"r");
 	
 fclose(txtfp);
 
-q(ngfn,(1920/4));
+//q(ngfn,(1920/4));
 
 
 	

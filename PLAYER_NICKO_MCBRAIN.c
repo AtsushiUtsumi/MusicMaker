@@ -52,7 +52,7 @@ static FILE *PassageOpen(int PassageID)
 	return fp;
 }
 
-static int fill_children_side(int masterfilenumber,CHILDREN_SIDE *dest,int n)//マスターファイルを使う関数には便利かも
+int fill_children_side(int masterfilenumber,CHILDREN_SIDE *dest,int n)//マスターファイルを使う関数には便利かも
 {
 	MASTERFORMAT m,c;int x=(-1);//一枚岩なら全部が代入される
 	int i,j;FILE *masterfp,*childfp;

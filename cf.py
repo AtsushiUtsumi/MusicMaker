@@ -1,0 +1,10 @@
+inf = open("codelist","r")
+outf = open("compile.sh","w")
+outf.write("#!bin/bash\n")
+outf.write("gcc -w ")
+fl = inf.readlines()
+for i in fl:
+	fn = i.strip()
+	outf.write(fn+" ")
+outf.close()
+inf.close()

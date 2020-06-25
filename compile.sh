@@ -1,0 +1,2 @@
+#!bin/bash
+gcc -w BORDERSMAKER.c CHORDMAKER.c CHORDPOOL.c CONVERT.c E_base.c Instrument_E_guitar.c Instrument_E_organ.c MAPBORDERSMAKER.c MIDI_FILE_OUT.c MOVEMENT.c MUSIC.c MasterMaker.c NCHORD.c NFY.c PARTS_COMMON.c PASSAGE.c PLAYER_BRUCE_DICKINSON.c PartsFunction.c SCORE.c SCRAP.c SESSION.c TRACKS.c UST.c accent_border.c chord_border.c main.c masterfile.c melody.c nameraka.c rythm_border.c コードの中身作成.c コードパート出力.c コンパイルとリンク.c マッピング.c 曲編成と楽節作成.c 使える音ファイル作成.c 大量のBARファイル出力.c 中身装填.c 量子化.c 

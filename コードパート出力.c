@@ -6,7 +6,7 @@
 //ベルトを出力すればなんでもいい手段は選ばない
 //後で同じ名前の本番の関数が出来たらテスト用関数は削除する
 
-static int chord_passage_compiler(char *passagefn,char *outputfn)//テスト用関数
+int chord_passage_compiler(char *passagefn,char *outputfn)//テスト用関数
 {int linekind,length,barh,ch,ah,rh,root,kind;
 	char header[1280];
 	FILE *mapfp;char mapfn[FILENAME_MAX];//コード装填済みのファイル
@@ -129,7 +129,7 @@ int ChordSplitter(char *chordbeltfn)//三つ編み分解関数
 }
 
 
-static int testc(int root,int i)
+int testc(int root,int i)
 {
 	int x;
 	x=root+2*i;

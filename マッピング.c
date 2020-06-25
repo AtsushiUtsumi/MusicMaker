@@ -8,7 +8,7 @@
 #include "rythm_border.h"
 
 
-static int cb_connect(int masternumber,int unit,char *outputfilename){FILE *outfp = NULL;char *outfn;
+int cb_connect(int masternumber,int unit,char *outputfilename){FILE *outfp = NULL;char *outfn;
 if(outputfilename==NULL){outfn = "DEFAULT_OUT_CB.txt";}else{outfn = outputfilename;}
 outfp = fopen(outfn,"w");
 //printf("ŠJn\n");
@@ -16,25 +16,25 @@ reader_kaiki_cb(outfp,masternumber);
 
 fclose(outfp);
 ////////////////////////–{—ˆ‚Í‚±‚±‚Å—Êq‰»‚·‚×‚«
-q(outfn,unit);remove(outfn);rename("—Êq‰».txt",outfn);
+//q(outfn,unit);remove(outfn);rename("—Êq‰».txt",outfn);
 ////////////////////////
 return 0;}
 static int ab_connect(int masternumber,int unit,char *outputfilename){FILE *outfp = NULL;char *outfn;
 if(outputfilename==NULL){outfn = "DEFAULT_OUT_AB.txt";}else{outfn = outputfilename;}
 outfp = fopen(outfn,"w");reader_kaiki_ab(outfp,masternumber);fclose(outfp);
 ////////////////////////–{—ˆ‚Í‚±‚±‚Å—Êq‰»‚·‚×‚«
-q(outfn,unit);remove(outfn);rename("—Êq‰».txt",outfn);
+//q(outfn,unit);remove(outfn);rename("—Êq‰».txt",outfn);
 ////////////////////////
 return 0;}
-static int rb_connect(int masternumber,int unit,char *outputfilename){FILE *outfp = NULL;char *outfn;
+int rb_connect(int masternumber,int unit,char *outputfilename){FILE *outfp = NULL;char *outfn;
 if(outputfilename==NULL){outfn = "DEFAULT_OUT_RB.txt";}else{outfn = outputfilename;}
 outfp = fopen(outfn,"w");reader_kaiki_rb(outfp,masternumber);fclose(outfp);
 ////////////////////////–{—ˆ‚Í‚±‚±‚Å—Êq‰»‚·‚×‚«
-q(outfn,unit);remove(outfn);rename("—Êq‰».txt",outfn);
+//q(outfn,unit);remove(outfn);rename("—Êq‰».txt",outfn);
 ////////////////////////
 return 0;}
 
-static int reader_kaiki_cb(FILE *fp,int masternumber)//ƒtƒ@ƒCƒ‹‚Ì––”ö‚Éƒ}ƒXƒ^[ƒtƒ@ƒCƒ‹‚Ì’†g‚ÌƒR[ƒhƒ{[ƒ_[‚ğ•t‚¯‘«‚·‰ñ‹AŠÖ”
+int reader_kaiki_cb(FILE *fp,int masternumber)//ƒtƒ@ƒCƒ‹‚Ì––”ö‚Éƒ}ƒXƒ^[ƒtƒ@ƒCƒ‹‚Ì’†g‚ÌƒR[ƒhƒ{[ƒ_[‚ğ•t‚¯‘«‚·‰ñ‹AŠÖ”
 {
 	int kari,rl;
 	extern FILE *chord_border_open(int number);
@@ -86,7 +86,7 @@ printf("ˆÈ‰ºRBƒtƒ@ƒCƒ‹[%d]\n",m.chord_border_file);
 	return 0;
 }
 
-static int reader_kaiki_ab(FILE *fp,int masternumber)//ƒtƒ@ƒCƒ‹‚Ì––”ö‚Éƒ}ƒXƒ^[ƒtƒ@ƒCƒ‹‚Ì’†g‚ğ•t‚¯‘«‚·ƒeƒXƒg—p‰ñ‹AŠÖ”
+int reader_kaiki_ab(FILE *fp,int masternumber)//ƒtƒ@ƒCƒ‹‚Ì––”ö‚Éƒ}ƒXƒ^[ƒtƒ@ƒCƒ‹‚Ì’†g‚ğ•t‚¯‘«‚·ƒeƒXƒg—p‰ñ‹AŠÖ”
 {
 	int kari,rl;
 	extern FILE *accent_border_open(int number);
@@ -135,7 +135,7 @@ static int reader_kaiki_ab(FILE *fp,int masternumber)//ƒtƒ@ƒCƒ‹‚Ì––”ö‚Éƒ}ƒXƒ^[ƒ
 	return 0;
 }
 
-static int reader_kaiki_rb(FILE *fp,int masternumber)//ƒtƒ@ƒCƒ‹‚Ì––”ö‚Éƒ}ƒXƒ^[ƒtƒ@ƒCƒ‹‚Ì’†g‚ÌƒŠƒYƒ€‚ğ•t‚¯‘«‚·ƒeƒXƒg—p‰ñ‹AŠÖ”
+int reader_kaiki_rb(FILE *fp,int masternumber)//ƒtƒ@ƒCƒ‹‚Ì––”ö‚Éƒ}ƒXƒ^[ƒtƒ@ƒCƒ‹‚Ì’†g‚ÌƒŠƒYƒ€‚ğ•t‚¯‘«‚·ƒeƒXƒg—p‰ñ‹AŠÖ”
 {
 	int kari,rl;
 	extern FILE *rythm_border_open(int number);
@@ -183,7 +183,7 @@ static int reader_kaiki_rb(FILE *fp,int masternumber)//ƒtƒ@ƒCƒ‹‚Ì––”ö‚Éƒ}ƒXƒ^[ƒ
 	return 0;
 }
 
-static int borders_mapper(int masternumber,int unit,char *outputfilename)//ƒ{[ƒ_[ƒtƒ@ƒCƒ‹‚ğ—Êqƒ}ƒbƒsƒ“ƒO‚·‚éŠÖ”
+int borders_mapper(int masternumber,int unit,char *outputfilename)//ƒ{[ƒ_[ƒtƒ@ƒCƒ‹‚ğ—Êqƒ}ƒbƒsƒ“ƒO‚·‚éŠÖ”
 {
 	char *defaultoutputfn = "ƒ}ƒbƒsƒ“ƒOƒeƒXƒg.txt";
 	char *outputfn;
